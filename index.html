@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1f6feb" />
+    <title>我的记账本</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='5' width='20' height='14' rx='3' fill='%231f6feb'/%3E%3Crect x='5' y='9' width='14' height='2' fill='white'/%3E%3C/svg%3E" />
+    <style>:root{--primary-50: #eff6ff;--primary-100: #dbeafe;--primary-200: #bfdbfe;--primary-300: #93c5fd;--primary-400: #60a5fa;--primary-500: #3b82f6;--primary-600: #2563eb;--primary-700: #1d4ed8;--income: #10b981;--income-light: #d1fae5;--expense: #ef4444;--expense-light: #fee2e2;--neutral-0: #ffffff;--neutral-50: #f8fafc;--neutral-100: #f1f5f9;--neutral-200: #e2e8f0;--neutral-300: #cbd5e1;--neutral-400: #94a3b8;--neutral-500: #64748b;--neutral-700: #334155;--neutral-900: #0f172a;--radius-sm: 8px;--radius-md: 12px;--radius-lg: 18px;--shadow-sm: 0 1px 2px rgba(15, 23, 42, .06);--shadow-md: 0 4px 16px rgba(15, 23, 42, .08);--shadow-lg: 0 18px 48px rgba(37, 99, 235, .14);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;font-weight:400;color:var(--neutral-900);background:linear-gradient(160deg,#dbeafe,#e0e7ff,#ede9fe);background-attachment:fixed;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:40px 16px}#app{width:100%;max-width:560px}.ledger-app{display:flex;flex-direction:column;gap:18px}.ledger-header{text-align:center;padding:4px 0 2px}.logo-badge{width:48px;height:48px;margin:0 auto 12px;border-radius:14px;background:linear-gradient(135deg,var(--primary-500),var(--primary-700));color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px #2563eb59}h1{margin:0;font-size:1.6rem;font-weight:700;letter-spacing:-.01em;color:var(--neutral-900)}.balance-card{background:linear-gradient(135deg,var(--primary-600),var(--primary-700));border-radius:var(--radius-lg);padding:24px 26px;color:#fff;box-shadow:0 14px 36px #2563eb4d}.balance-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}.balance-label{font-size:.9rem;opacity:.85}.balance-amount{font-size:1.9rem;font-weight:700;letter-spacing:-.02em}.balance-amount.negative{color:#fecaca}.balance-split{display:flex;gap:14px}.split-item{flex:1;background:#ffffff1f;border-radius:var(--radius-md);padding:12px 14px;display:flex;flex-direction:column;gap:2px}.split-label{font-size:.78rem;opacity:.85}.split-amount{font-size:1.1rem;font-weight:600}.add-card{background:var(--neutral-0);border-radius:var(--radius-lg);padding:22px 24px;box-shadow:var(--shadow-md);border:1px solid var(--neutral-200)}.type-toggle{display:flex;gap:8px;margin-bottom:18px;background:var(--neutral-100);border-radius:var(--radius-md);padding:4px}.type-btn{flex:1;padding:10px;border:none;border-radius:var(--radius-sm);font-size:.95rem;font-weight:600;font-family:inherit;background:transparent;color:var(--neutral-500);cursor:pointer;transition:all .2s}.type-btn.active{background:var(--neutral-0);color:var(--primary-600);box-shadow:var(--shadow-sm)}.entry-form{display:flex;flex-direction:column;gap:12px}.form-row{display:flex;gap:10px}.entry-form input,.entry-form select{flex:1;padding:12px 14px;font-size:.95rem;font-family:inherit;color:var(--neutral-900);background:var(--neutral-50);border:1.5px solid var(--neutral-200);border-radius:var(--radius-md);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}.entry-form input::placeholder{color:var(--neutral-400)}.entry-form input:focus,.entry-form select:focus{border-color:var(--primary-500);background:var(--neutral-0);box-shadow:0 0 0 3px var(--primary-100)}.entry-form input[type=number]{max-width:45%}.submit-btn{padding:13px;font-size:1rem;font-weight:600;font-family:inherit;color:#fff;background:linear-gradient(135deg,var(--primary-500),var(--primary-600));border:none;border-radius:var(--radius-md);cursor:pointer;box-shadow:0 6px 16px #2563eb47;transition:transform .15s,box-shadow .2s,filter .2s}.submit-btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px #2563eb57;filter:brightness(1.05)}.submit-btn:active{transform:translateY(0)}.list-section{background:var(--neutral-0);border-radius:var(--radius-lg);padding:22px 24px;box-shadow:var(--shadow-md);border:1px solid var(--neutral-200)}.list-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.list-header h2{margin:0;font-size:1.1rem;font-weight:700;color:var(--neutral-900)}.clear-all-btn{padding:6px 12px;font-size:.82rem;font-weight:500;font-family:inherit;color:var(--neutral-500);background:var(--neutral-100);border:1px solid var(--neutral-200);border-radius:20px;cursor:pointer;transition:background .18s,color .18s}.clear-all-btn:hover{background:var(--expense-light);color:var(--expense)}.entry-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.entry-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--neutral-50);border:1px solid var(--neutral-200);border-radius:var(--radius-md);transition:border-color .2s,background .2s;animation:slideIn .2s ease}.entry-item:hover{background:var(--primary-50);border-color:var(--primary-200)}@keyframes slideIn{0%{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}.entry-icon{font-size:1.3rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:var(--neutral-0);border:1px solid var(--neutral-200);border-radius:10px;flex-shrink:0}.entry-info{flex:1;display:flex;flex-direction:column;min-width:0}.entry-cat{font-size:.95rem;font-weight:500;color:var(--neutral-700);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.entry-date{font-size:.78rem;color:var(--neutral-400)}.entry-amount{font-size:1rem;font-weight:700;white-space:nowrap}.entry-amount.income{color:var(--income)}.entry-amount.expense{color:var(--expense)}.entry-delete{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex-shrink:0;border:none;border-radius:8px;background:transparent;color:var(--neutral-300);cursor:pointer;transition:background .18s,color .18s}.entry-delete:hover{background:var(--expense-light);color:var(--expense)}.empty-state{text-align:center;color:var(--neutral-300);padding:32px 16px}.empty-state p{margin:12px 0 0;font-size:.95rem}@media (max-width: 520px){body{padding:20px 12px}.balance-amount{font-size:1.6rem}.add-card,.list-section{padding:18px 16px}.form-row{flex-direction:column}.entry-form input[type=number]{max-width:none}}
+</style>
+    <style>
+      .local-note {
+        max-width: 480px; margin: 10px auto 0; padding: 8px 12px; border-radius: 10px;
+        background: #e8f0ff; color: #1f4fa8; font-size: 12px; line-height: 1.5;
+        display: flex; align-items: center; gap: 8px;
+      }
+      .local-note span { flex: 1; }
+      .local-note button {
+        border: 0; background: transparent; color: #5b7ccc; font-size: 16px;
+        line-height: 1; padding: 2px 4px; cursor: pointer;
+      }
+      @media (max-width: 640px) {
+        .local-note { margin: 8px 12px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    
+<div id="local-note" class="local-note">
+  <span id="local-note-text">已内置 10.11–10.23 共 35 条账目 · 结余 ¥976.74</span>
+  <button type="button" id="local-note-x" aria-label="关闭">×</button>
+</div>
+    <div id="app"></div>
+    <script type="module">const __SEED__=[{"id":"seed-005","type":"expense","amount":20,"category":"other-expense","date":"2026-10-11","note":"话费","createdAt":1760000000000},{"id":"seed-004","type":"expense","amount":0.5,"category":"transport","date":"2026-10-11","note":"共享单车忘关","createdAt":1760000060000},{"id":"seed-003","type":"expense","amount":2,"category":"other-expense","date":"2026-10-11","note":"水","createdAt":1760000120000},{"id":"seed-002","type":"expense","amount":2,"category":"other-expense","date":"2026-10-11","note":"打赏","createdAt":1760000180000},{"id":"seed-001","type":"expense","amount":23.9,"category":"food","date":"2026-10-11","note":"伙食费","createdAt":1760000240000},{"id":"seed-034","type":"income","amount":1133.04,"category":"other-income","date":"2026-10-11","note":"期初余额 10.11","createdAt":1760000300000},{"id":"seed-008","type":"expense","amount":9.9,"category":"shopping","date":"2026-10-12","note":"瑜伽垫","createdAt":1760000360000},{"id":"seed-007","type":"expense","amount":19,"category":"food","date":"2026-10-12","note":"伙食费 9+10","createdAt":1760000420000},{"id":"seed-006","type":"expense","amount":21.9,"category":"shopping","date":"2026-10-12","note":"手机膜","createdAt":1760000480000},{"id":"seed-013","type":"expense","amount":3.94,"category":"food","date":"2026-10-13","note":"香蕉","createdAt":1760000540000},{"id":"seed-012","type":"expense","amount":28,"category":"other-expense","date":"2026-10-13","note":"剪发","createdAt":1760000600000},{"id":"seed-011","type":"expense","amount":43,"category":"food","date":"2026-10-13","note":"聚餐","createdAt":1760000660000},{"id":"seed-010","type":"expense","amount":12,"category":"food","date":"2026-10-13","note":"伙食费","createdAt":1760000720000},{"id":"seed-009","type":"expense","amount":9.9,"category":"shopping","date":"2026-10-13","note":"肌酸粉","createdAt":1760000780000},{"id":"seed-014","type":"expense","amount":29.8,"category":"food","date":"2026-10-14","note":"伙食费 3.5+10.5+15.8","createdAt":1760000840000},{"id":"seed-015","type":"expense","amount":24.5,"category":"food","date":"2026-10-15","note":"伙食费 13.5+11","createdAt":1760000900000},{"id":"seed-019","type":"expense","amount":69,"category":"shopping","date":"2026-10-16","note":"衣服","createdAt":1760000960000},{"id":"seed-018","type":"expense","amount":24.9,"category":"food","date":"2026-10-16","note":"坚果","createdAt":1760001020000},{"id":"seed-017","type":"expense","amount":49.9,"category":"food","date":"2026-10-16","note":"纯牛奶","createdAt":1760001080000},{"id":"seed-016","type":"expense","amount":23.5,"category":"food","date":"2026-10-16","note":"伙食费 4+9.5+10","createdAt":1760001140000},{"id":"seed-022","type":"expense","amount":1,"category":"entertainment","date":"2026-10-17","note":"抖音钻石","createdAt":1760001200000},{"id":"seed-021","type":"expense","amount":2.8,"category":"food","date":"2026-10-17","note":"香蕉","createdAt":1760001260000},{"id":"seed-020","type":"expense","amount":34.5,"category":"food","date":"2026-10-17","note":"伙食费 5+12.5+17","createdAt":1760001320000},{"id":"seed-024","type":"expense","amount":0.23,"category":"other-expense","date":"2026-10-18","note":"手续费","createdAt":1760001380000},{"id":"seed-023","type":"expense","amount":31.5,"category":"food","date":"2026-10-18","note":"伙食费 3+14.5+12+2","createdAt":1760001440000},{"id":"seed-035","type":"income","amount":524.75,"category":"other-income","date":"2026-10-18","note":"余额补记 10.18 周初1201.85","createdAt":1760001500000},{"id":"seed-025","type":"expense","amount":32.5,"category":"food","date":"2026-10-19","note":"伙食费 4+10.5+18","createdAt":1760001560000},{"id":"seed-028","type":"expense","amount":9.94,"category":"shopping","date":"2026-10-20","note":"手套","createdAt":1760001620000},{"id":"seed-027","type":"expense","amount":3.54,"category":"food","date":"2026-10-20","note":"香蕉","createdAt":1760001680000},{"id":"seed-026","type":"expense","amount":32,"category":"food","date":"2026-10-20","note":"伙食费 4+13+15","createdAt":1760001740000},{"id":"seed-029","type":"expense","amount":28,"category":"food","date":"2026-10-21","note":"伙食费 5.5+11.5+11","createdAt":1760001800000},{"id":"seed-031","type":"expense","amount":10,"category":"other-expense","date":"2026-10-22","note":"话费","createdAt":1760001860000},{"id":"seed-030","type":"expense","amount":31.42,"category":"food","date":"2026-10-22","note":"伙食费 3.42+13+12+3","createdAt":1760001920000},{"id":"seed-033","type":"expense","amount":40.98,"category":"food","date":"2026-10-23","note":"伙食费 22.48+16.5+2","createdAt":1760001980000},{"id":"seed-032","type":"expense","amount":5,"category":"other-expense","date":"2026-10-23","note":"公益","createdAt":1760002040000}];const __SEED_META__={week1:455.94,week2:225.11,expense:681.05,income:1657.79,balance:976.74,count:35};(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))s(t);new MutationObserver(t=>{for(const i of t)if(i.type==="childList")for(const e of i.addedNodes)e.tagName==="LINK"&&e.rel==="modulepreload"&&s(e)}).observe(document,{childList:!0,subtree:!0});function a(t){const i={};return t.integrity&&(i.integrity=t.integrity),t.referrerPolicy&&(i.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?i.credentials="include":t.crossOrigin==="anonymous"?i.credentials="omit":i.credentials="same-origin",i}function s(t){if(t.ep)return;t.ep=!0;const i=a(t);fetch(t.href,i)}})();const f="ledger-entries",p={expense:[{id:"food",label:"餐饮",icon:"🍜"},{id:"transport",label:"交通",icon:"🚗"},{id:"shopping",label:"购物",icon:"🛍️"},{id:"housing",label:"居家",icon:"🏠"},{id:"entertainment",label:"娱乐",icon:"🎮"},{id:"medical",label:"医疗",icon:"💊"},{id:"other-expense",label:"其他",icon:"📦"}],income:[{id:"salary",label:"工资",icon:"💰"},{id:"bonus",label:"奖金",icon:"🎁"},{id:"investment",label:"理财",icon:"📈"},{id:"other-income",label:"其他",icon:"📦"}]},v=[...p.expense,...p.income],b=Object.fromEntries(v.map(n=>[n.id,n]));function m(){try{const n=localStorage.getItem(f);if(n!==null)return JSON.parse(n)}catch(e){}try{localStorage.setItem(f,JSON.stringify(__SEED__))}catch(e){}return __SEED__.slice()}function u(n){try{localStorage.setItem(f,JSON.stringify(n))}catch(e){}}function d(n){return"¥"+Number(n).toLocaleString("zh-CN",{minimumFractionDigits:2,maximumFractionDigits:2})}function g(){const n=new Date,o=a=>String(a).padStart(2,"0");return`${n.getFullYear()}-${o(n.getMonth()+1)}-${o(n.getDate())}`}let c="expense";function l(){const n=document.querySelector("#app"),o=m().sort((e,r)=>r.createdAt-e.createdAt),a=o.filter(e=>e.type==="income").reduce((e,r)=>e+r.amount,0),s=o.filter(e=>e.type==="expense").reduce((e,r)=>e+r.amount,0),t=a-s,i=p[c].map(e=>`<option value="${e.id}">${e.icon} ${e.label}</option>`).join("");n.innerHTML=`
+    <div class="ledger-app">
+      <header class="ledger-header">
+        <div class="logo-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+        </div>
+        <h1>我的记账本</h1>
+      </header>
+
+      <section class="balance-card">
+        <div class="balance-row">
+          <span class="balance-label">当前结余</span>
+          <span class="balance-amount ${t>=0?"positive":"negative"}">${d(t)}</span>
+        </div>
+        <div class="balance-split">
+          <div class="split-item income">
+            <span class="split-label">收入</span>
+            <span class="split-amount">${d(a)}</span>
+          </div>
+          <div class="split-item expense">
+            <span class="split-label">支出</span>
+            <span class="split-amount">${d(s)}</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="add-card">
+        <div class="type-toggle">
+          <button class="type-btn ${c==="expense"?"active":""}" data-type="expense">支出</button>
+          <button class="type-btn ${c==="income"?"active":""}" data-type="income">收入</button>
+        </div>
+        <form id="entry-form" class="entry-form" autocomplete="off">
+          <div class="form-row">
+            <input id="entry-amount" type="number" inputmode="decimal" step="0.01" min="0" placeholder="金额" required />
+            <select id="entry-category">${i}</select>
+          </div>
+          <div class="form-row">
+            <input id="entry-date" type="date" value="${g()}" required />
+            <input id="entry-note" type="text" placeholder="备注（可选）" maxlength="40" />
+          </div>
+          <button type="submit" class="submit-btn">➕ 记一笔</button>
+        </form>
+      </section>
+
+      <section class="list-section">
+        <div class="list-header">
+          <h2>账目明细</h2>
+          ${o.length>0?'<button id="clear-all" class="clear-all-btn">🧹 清空全部</button>':""}
+        </div>
+        ${o.length===0?`
+          <div class="empty-state">
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="13" y2="17"></line></svg>
+            <p>还没有记录，记第一笔吧</p>
+          </div>
+        `:`
+          <ul class="entry-list" id="entry-list">
+            ${o.map(e=>{const r=b[e.category]||{icon:"📦",label:"其他"};return`
+              <li class="entry-item ${e.type}" data-id="${e.id}">
+                <span class="entry-icon">${r.icon}</span>
+                <div class="entry-info">
+                  <span class="entry-cat">${r.label}${e.note?` · ${h(e.note)}`:""}</span>
+                  <span class="entry-date">${e.date}</span>
+                </div>
+                <span class="entry-amount ${e.type}">${e.type==="income"?"+":"-"}${d(e.amount)}</span>
+                <button class="entry-delete" aria-label="删除">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </li>`}).join("")}
+          </ul>
+        `}
+      </section>
+    </div>
+  `,x()}function h(n){const o=document.createElement("div");return o.textContent=n,o.innerHTML}function x(){const n=document.querySelector("#entry-form"),o=document.querySelector("#entry-list");document.querySelectorAll(".type-btn").forEach(s=>{s.addEventListener("click",()=>{c=s.dataset.type,l()})}),n.addEventListener("submit",s=>{s.preventDefault();const t=parseFloat(document.querySelector("#entry-amount").value),i=document.querySelector("#entry-category").value,e=document.querySelector("#entry-date").value,r=document.querySelector("#entry-note").value.trim();if(!t||t<=0||!e)return;const y=m();y.push({id:Date.now()+Math.random().toString(36).slice(2,7),type:c,amount:t,category:i,date:e,note:r,createdAt:Date.now()}),u(y),l()}),o&&o.addEventListener("click",s=>{const t=s.target.closest(".entry-item");if(!t||!s.target.closest(".entry-delete"))return;const i=t.dataset.id,e=m().filter(r=>r.id!==i);u(e),l()});const a=document.querySelector("#clear-all");a&&a.addEventListener("click",()=>{confirm("确定清空所有记录吗？此操作不可撤销。")&&(u([]),l())})}l();
+</script>
+    <script>
+      (function () {
+        var note = document.getElementById('local-note');
+        var btn = document.getElementById('local-note-x');
+        var forceShow = /(^|[?&])nohide=1/.test(location.search);
+        try { if (!forceShow && localStorage.getItem('ledger-note-hidden') === '1' && note) note.remove(); } catch (e) {}
+        if (btn) btn.addEventListener('click', function () {
+          if (note) note.remove();
+          try { localStorage.setItem('ledger-note-hidden', '1'); } catch (e) {}
+        });
+        // 存储可用性检测：某些 App 内置浏览器 / file:// 预览会禁用 localStorage
+        var ok = false;
+        try { localStorage.setItem('__ls_test__', '1'); ok = localStorage.getItem('__ls_test__') === '1'; localStorage.removeItem('__ls_test__'); } catch (e) { ok = false; }
+        if (!ok && note) {
+          note.style.background = '#ffecec';
+          note.style.color = '#a01a1a';
+          var t = document.getElementById('local-note-text');
+          if (t) t.textContent = '⚠️ 当前环境不能保存数据（可能是 App 内预览或受限浏览器），请用 Chrome / Edge / Safari 直接打开本文件或网址';
+        }
+      })();
+    </script>
+  </body>
+</html>
